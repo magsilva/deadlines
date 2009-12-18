@@ -9,7 +9,7 @@ class Work_type_Test extends PHPUnit_Framework_TestCase
 
 	private $database;
 
-	protected function setUp()
+	protected function setUpBeforeClass()
 	{
 		$this->database = tempnam(sys_get_temp_dir(), 'test');
 		$url = 'sqlite:' . $database;
@@ -17,7 +17,7 @@ class Work_type_Test extends PHPUnit_Framework_TestCase
 
 		$this->dao = new Work_type_DAO($url, 'root', '');
 		$this->dao->beginTransaction();
-		$sql_stmts_filename = 'resources/deadline-test.sql';
+		$sql_stmts_filename = dirname(__FILE__) . '/../resources/deadline-test.sql';
 		$sql_stmts = file($data_filename, FILE_SKIP_EMPTY_LINES);
 		foreach ($sql_stmts as $stmt) {
 			$this->dao->exec($stmt);
@@ -25,9 +25,15 @@ class Work_type_Test extends PHPUnit_Framework_TestCase
 		$this->dao->commit();
         }
 
-	protected function tearDown()
+	protected function tearDownAfterClass()
 	{
 		unlink($this->database);
+	}
+
+	public function testOne()
+	{
+		print __METHOD__ . "\n";
+		$this->assertTrue(TRUE);
 	}
 }
 ?>

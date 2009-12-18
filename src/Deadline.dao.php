@@ -2,7 +2,7 @@
 
 require_once('Work_type.class.php');
 
-class Work_type_DAO extends Database_DAO
+abstract class Deadline_DAO extends Database_DAO
 {
         public function __construct($db_driver, $db_host, $db_name, $db_user, $db_password)
 	{
@@ -44,7 +44,7 @@ class Work_type_DAO extends Database_DAO
 		$sth->execute();
 		$result2 = $sth->fetch(PDO::FETCH_ASSOC);
 
-		$deadline->set
+//		$deadline->set
 	}
 
 	private function manufacture_work_type($id)

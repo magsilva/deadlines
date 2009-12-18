@@ -2,7 +2,7 @@
 
 require_once('Factory.interface.php');
 
-abstract class SingletonFactory implements Factory
+class SingletonFactory implements Factory
 {
 	private static $singletons;
 
@@ -36,7 +36,7 @@ abstract class SingletonFactory implements Factory
 	public function manufacture($type, $id)
 	{
 		if (! isset(self::$loaders[$type])) {
-			trigger_error('Unsupported object type');
+			trigger_error('Unsupported object type ' . $type);
 		}
 
 		if (isset(self::$singletons[$type][$id])) {
