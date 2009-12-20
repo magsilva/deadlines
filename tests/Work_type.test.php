@@ -5,29 +5,33 @@ require_once('PHPUnit/Framework.php');
 
 class Work_type_Test extends PHPUnit_Framework_TestCase
 {
-	private $dao;
+	private static $dao;
 
-	private $database;
+	private static $database;
 
-	protected function setUpBeforeClass()
+	public static function setUpBeforeClass()
 	{
-		$this->database = tempnam(sys_get_temp_dir(), 'test');
-		$url = 'sqlite:' . $database;
-		echo 'Database will be stored at' . $this->database;
+		define('TEST_USING_SQLITE', true);
 
-		$this->dao = new Work_type_DAO($url, 'root', '');
-		$this->dao->beginTransaction();
+		self::$database = tempnam(sys_get_temp_dir(), 'test');
+		$url = 'sqlite:' . self::$database;
+		echo 'Database will be stored at ' . self::$database;
+
+		self::$dao = new Work_type_DAO($url, 'root', '');
+		self::$dao->beginTransaction();
 		$sql_stmts_filename = dirname(__FILE__) . '/../resources/deadline-test.sql';
-		$sql_stmts = file($data_filename, FILE_SKIP_EMPTY_LINES);
+		echo 'Database will be populated using the statements found at ' . $sql_stmts_filename;
+
+		$sql_stmts = file($sql_stmts_filename, FILE_SKIP_EMPTY_LINES);
 		foreach ($sql_stmts as $stmt) {
-			$this->dao->exec($stmt);
+			self::$dao->exec($stmt);
 		}
-		$this->dao->commit();
+		self::$dao->commit();
         }
 
-	protected function tearDownAfterClass()
+	public static function tearDownAfterClass()
 	{
-		unlink($this->database);
+		unlink(self::$database);
 	}
 
 	public function testOne()

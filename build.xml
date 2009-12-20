@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<project name="deadlines" default="test" basedir=".">
+
+	<fileset dir="src" id="php">
+		<include name="*.php"/>
+		<include name="**/*.php/"/>
+	</fileset>
+
+	<fileset dir="tests" id="tests">
+		<include name="*Test.php"/>
+		<include name="**/*Test.php"/>
+	</fileset>
+
+	<target name="test">
+		<mkdir dir="reports/coverage_db" />
+		<mkdir dir="reports/coverage_result" />
+
+		<coverage-setup database="reports/coverage.db">
+			<fileset refid="php"/>
+		</coverage-setup>
+
+		<phpunit2 codecoverage="true">
+			<batchtest>
+				<fileset refid="tests"/>
+			</batchtest>
+		</phpunit2>
+
+		<coverage-report outfile="reports/coverage.xml">
+			<report todir="reports/coverage_result"/>
+		</coverage-report>
+	</target>
+</project>
+

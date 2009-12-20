@@ -5,9 +5,9 @@ require_once('Work_type.class.php');
 
 class Work_type_DAO extends Database_DAO
 {
-        public function __construct($db_driver, $db_host, $db_name, $db_user, $db_password)
+        public function __construct($url, $db_user, $db_password)
 	{
-		parent::__construct($db_driver, $db_host, $db_name, $db_user, $db_password);
+		parent::__construct($url, $db_user, $db_password);
 	}
 
 	public function create($data)
