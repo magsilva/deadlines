@@ -5,7 +5,7 @@ require_once('Work_type.class.php');
 
 class Work_type_DAO extends Database_DAO
 {
-        public function __construct($url, $db_user, $db_password)
+	public function __construct($url, $db_user, $db_password)
 	{
 		parent::__construct($url, $db_user, $db_password);
 	}
@@ -19,6 +19,8 @@ class Work_type_DAO extends Database_DAO
 		$sth->bindParam(':description', $data['description']);
 		$sth->execute();
 		$this->commit();
+		
+		return $this->lastInsertId();
 	}
 
 	public function read($id)
@@ -28,7 +30,10 @@ class Work_type_DAO extends Database_DAO
 		$sth->bindParam(':id', $id);
 		$sth->execute();
 		$result = $sth->fetch(PDO::FETCH_ASSOC);
-
+		if ($result === FALSE) {
+			return null;
+		}
+		
 		$work_type = new Work_type($id);
 		$work_type->set_name($result['name']);
 		$work_type->set_description($result['description']);
@@ -39,13 +44,17 @@ class Work_type_DAO extends Database_DAO
 
 	public function update($object)
 	{
-		$this->beginTransactioin();
+		$this->beginTransaction();
 		$sth = $this->prepare('UPDATE work_types SET name=:name, description=:description WHERE id=:id');
-		$sth->bindParam(':id', $object->get_id());
-		$sth->bindParam(':name', $object->get_name());
-		$sth->bindParam(':description', $object->get_description());
+		$name = $object->get_name();
+		$description = $object->get_description();
+		$id = $object->get_id();
+		
+		$sth->bindParam(':name', $name);
+		$sth->bindParam(':description', $description);
+		$sth->bindParam(':id', $id);
+		
 		$sth->execute();
-
 		$this->commit();
 	}
 
@@ -53,7 +62,8 @@ class Work_type_DAO extends Database_DAO
 	{
 		$this->beginTransaction();
 		$sth = $this->prepare('DELETE FROM work_types WHERE id=:id');
-		$sth->bindParam(':id', $object->get_id());
+		$id = $object->get_id();
+		$sth->bindParam(':id', $id);
 		$sth->execute();
 
 		$this->commit();

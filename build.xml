@@ -8,23 +8,30 @@
 	</fileset>
 
 	<fileset dir="tests" id="tests">
-		<include name="*Test.php"/>
-		<include name="**/*Test.php"/>
+		<include name="*.test.php"/>
+		<include name="**/*.test.php"/>
 	</fileset>
 
+	<target name="clean">
+		<delete dir="reports/" includeemptydirs="true" />
+	</target>
+	
 	<target name="test">
 		<mkdir dir="reports/coverage_db" />
 		<mkdir dir="reports/coverage_result" />
+		
+		<includepath classpath="${project.basedir}/src:/var/www/default/Libs" />
 
 		<coverage-setup database="reports/coverage.db">
 			<fileset refid="php"/>
 		</coverage-setup>
 
-		<phpunit2 codecoverage="true">
+		<phpunit codecoverage="true" printsummary="true">
+			<formatter todir="reports" type="plain" usefile="false"/>
 			<batchtest>
 				<fileset refid="tests"/>
 			</batchtest>
-		</phpunit2>
+		</phpunit>
 
 		<coverage-report outfile="reports/coverage.xml">
 			<report todir="reports/coverage_result"/>

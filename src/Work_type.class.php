@@ -17,6 +17,11 @@ class Work_type
 		$this->id = $id;
 	}
 
+	public function get_id()
+	{
+		return $this->id;
+	}
+	
 	public function set_name($name)
 	{
 		check_string($name, 'Invalid name for the work type');
