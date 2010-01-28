@@ -12,34 +12,13 @@ class Work_type_DAO extends Database_DAO
 
 	public function create($data)
 	{
-		$this->beginTransaction();
-
-		$sth = $this->prepare('INSERT INTO work_types(name, description) VALUES (:name, :description)');
-		$sth->bindParam(':name', $data['name']);
-		$sth->bindParam(':description', $data['description']);
-		$sth->execute();
-		$this->commit();
-		
-		return $this->lastInsertId();
+		return parent::create($data);
 	}
 
+	
 	public function read($id)
 	{
-		$this->beginTransaction();
-		$sth = $this->prepare('SELECT * FROM work_types WHERE id=:id');
-		$sth->bindParam(':id', $id);
-		$sth->execute();
-		$result = $sth->fetch(PDO::FETCH_ASSOC);
-		if ($result === FALSE) {
-			return null;
-		}
-		
-		$work_type = new Work_type($id);
-		$work_type->set_name($result['name']);
-		$work_type->set_description($result['description']);
-
-		$this->commit();
-		return $work_type;
+		return parent::read($id);
 	}
 
 	public function update($object)
