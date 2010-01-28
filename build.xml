@@ -8,7 +8,6 @@
 	</fileset>
 
 	<fileset dir="tests" id="tests">
-		<include name="*.test.php"/>
 		<include name="**/*.test.php"/>
 	</fileset>
 
@@ -17,11 +16,20 @@
 	</target>
 	
 	<target name="test">
+		<includepath classpath="${project.basedir}/src:/var/www/default/Libs" />
+
+		<phpunit codecoverage="false" printsummary="true">
+			<formatter todir="reports" type="plain" usefile="false"/>
+			<batchtest>
+				<fileset refid="tests"/>
+			</batchtest>
+		</phpunit>
+	</target>
+	
+	<target name="coverage">
 		<mkdir dir="reports/coverage_db" />
 		<mkdir dir="reports/coverage_result" />
 		
-		<includepath classpath="${project.basedir}/src:/var/www/default/Libs" />
-
 		<coverage-setup database="reports/coverage.db">
 			<fileset refid="php"/>
 		</coverage-setup>
