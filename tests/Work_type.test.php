@@ -29,7 +29,7 @@ class Work_type_Test extends PHPUnit_Framework_TestCase
 
 	public static function tearDownAfterClass()
 	{
-		unlink(self::$database);
+		 unlink(self::$database);
 	}
 
 	public function testRead()
@@ -46,7 +46,7 @@ class Work_type_Test extends PHPUnit_Framework_TestCase
 		$work_type_id = self::$dao->create($data);
 		$this->assertEquals($work_type_id, 10);
 	}
-	
+
 	public function testUpdate()
 	{
 		$work_type = self::$dao->read(3);

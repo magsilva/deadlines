@@ -64,7 +64,7 @@ abstract class Database_DAO extends PDO implements DAO
 		$sth = $this->prepare($stmt);
 		
 		foreach($data as $key => $value) {
-			$sth->bindParam(':' . $key, $value);
+			$sth->bindValue(':' . $key, $value);
 		}
 		$sth->execute();
 		$this->commit();
@@ -80,7 +80,7 @@ abstract class Database_DAO extends PDO implements DAO
 		
 		$this->beginTransaction();
 		$sth = $this->prepare('SELECT * FROM ' . $table . ' WHERE id=:id');
-		$sth->bindParam(':id', $id);
+		$sth->bindValue(':id', $id);
 		$sth->execute();
 		$result = $sth->fetch(PDO::FETCH_ASSOC);
 		$this->commit();
@@ -106,21 +106,61 @@ abstract class Database_DAO extends PDO implements DAO
 	
 	public function update($object)
 	{
+		$type = $this->get_type();
+		$table = $this->get_table_name();
+		
 		$this->beginTransaction();
-		$sth = $this->prepare('UPDATE work_types SET name=:name, description=:description WHERE id=:id');
-		$name = $object->get_name();
-		$description = $object->get_description();
-		$id = $object->get_id();
+		$stmt = 'UPDATE ' . $table . ' SET ';
+	
+		$class = new ReflectionClass($type);
+		$properties = $class->getProperties();
+		foreach ($properties as $property) {
+			if ($property->isPrivate() && $class->hasMethod('get_' . $property->getName()) && $class->hasMethod('set_' . $property->getName())) {
+				$stmt .= $property->getName() . '=:' . $property->getName() . ', '; 	
+			}
+		}
+		if (strpos($stmt, ', ', strlen($stmt) - 2)) {
+			$stmt = substr($stmt, 0, strlen($stmt) - 2);
+		}
 		
-		$sth->bindParam(':name', $name);
-		$sth->bindParam(':description', $description);
-		$sth->bindParam(':id', $id);
+		$stmt .= ' WHERE ';
+		foreach ($properties as $property) {
+			if ($property->isPrivate() && $class->hasMethod('get_' . $property->getName()) && ! $class->hasMethod('set_' . $property->getName())) {
+				$stmt .= $property->getName() . '=:' . $property->getName() . ', '; 	
+			}
+		}
+		if (strpos($stmt, ', ', strlen($stmt) - 2)) {
+			$stmt = substr($stmt, 0, strlen($stmt) - 2);
+		}
 		
-		$sth->execute();
+		$sth = $this->prepare($stmt);
+		
+		foreach ($properties as $property) {
+			if ($property->isPrivate() && $class->hasMethod('get_' . $property->getName())) {
+				$method = $class->getMethod('get_' . $property->getName());
+				$value = $method->invoke($object);
+				$sth->bindValue(':' . $property->getName(), $value);
+			}
+		}
+
+		$result = $sth->execute();
+		if ($result == FALSE || $sth->rowCount() != 1) {
+			// TODO: Improve error handling var_dump('Error running SQL prepared statement', $result, $sth->rowCount(), $stmt);
+		}
 		$this->commit();
 	}
 	
-	
+	public function delete($object)
+	{
+		$table = $this->get_table_name();
+		
+		$this->beginTransaction();
+		$sth = $this->prepare('DELETE FROM ' . $table . ' WHERE id=:id');
+		$sth->bindValue(':id', $object->get_id());
+		$sth->execute();
+		$this->commit();
+	}
 }
 
 ?>
+ 
