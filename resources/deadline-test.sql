@@ -67,35 +67,37 @@ INSERT INTO `event_types` (`id`, `name`, `description`) VALUES(5, 'Symposium', N
 
 CREATE TABLE IF NOT EXISTS events (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  event_id INTEGER NOT NULL,
+  publication_id INTEGER NOT NULL,
+  type_id INTEGER NOT NULL,
   co_located_with_id INTEGER,
-  start_date date NOT NULL,
-  end_date date NOT NULL,
-  location varchar(255) NOT NULL,
+  start_date date,
+  end_date date,
+  location varchar(255),
   acceptance_rate decimal(10,2),
-  FOREIGN KEY (event_id) REFERENCES publications(id),
+  FOREIGN KEY (type_id) REFERENCES event_types(id),
+  FOREIGN KEY (publication_id) REFERENCES publications(id),
   FOREIGN KEY (co_located_with_id) REFERENCES events(id)
 );
 
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(1, 20, NULL, '2010-01-29', '2010-01-31', 'Melbourne, Florida, USA', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(2, 7, NULL, '2010-07-19', '2010-07-23', 'Singapore', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(3, 10, NULL, '2010-08-04', '2010-08-06', 'Taichung, Taiwan', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(4, 4, NULL, '2010-06-09', '2010-06-11', 'Tampere, Finland', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(5, 13, NULL, '2010-07-01', '2010-07-03', 'Hotel Sofitel, San Francisco Bay, USA', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(6, 18, NULL, '2009-11-17', '2009-11-20', 'Florianópolis, SC, Brazil', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(7, 17, NULL, '2009-11-17', '2009-11-20', 'Florianópolis, SC, Brazil', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(9, 21, NULL, '2009-11-17', '2009-11-20', 'Florianópolis, SC, Brazil', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(10, 19, NULL, '2010-03-27', '2010-03-27', 'Paphos, Cyprus', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(11, 15, NULL, '2010-05-11', '2010-05-11', 'Toronto, Canada', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(12, 3, NULL, '2009-11-15', '2009-11-17', 'Porto Alegre, RS, Brazil', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(13, 22, NULL, '2010-06-28', '2010-07-02', 'Toronto, Canada', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(14, 11, NULL, '2010-03-19', '2010-03-21', 'Porto, Portugal', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(15, 9, NULL, '2009-12-01', '2009-12-01', '', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(16, 16, NULL, '2009-11-23', '2009-11-23', '', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(17, 14, NULL, '2010-05-03', '2010-05-04', 'Cape Town, South Africa', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(18, 12, NULL, '2010-06-28', '2010-06-30', 'San Diego, CA, USA ', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(19, 8, NULL, '2010-10-27', '2010-10-30', 'Washington', '0.00');
-INSERT INTO `events` (`id`, `event_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(21, 23, NULL, '2010-06-28', '2010-06-30', 'London, UK', NULL);
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(1, 1, 20, NULL, '2010-01-29', '2010-01-31', 'Melbourne, Florida, USA', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(2, 1, 7, NULL, '2010-07-19', '2010-07-23', 'Singapore', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(3, 1, 10, NULL, '2010-08-04', '2010-08-06', 'Taichung, Taiwan', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(4, 1, 4, NULL, '2010-06-09', '2010-06-11', 'Tampere, Finland', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(5, 1, 13, NULL, '2010-07-01', '2010-07-03', 'Hotel Sofitel, San Francisco Bay, USA', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(6, 1, 18, NULL, '2009-11-17', '2009-11-20', 'Florianópolis, SC, Brazil', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(7, 1, 17, NULL, '2009-11-17', '2009-11-20', 'Florianópolis, SC, Brazil', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(9, 1, 21, NULL, '2009-11-17', '2009-11-20', 'Florianópolis, SC, Brazil', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(10, 1, 19, NULL, '2010-03-27', '2010-03-27', 'Paphos, Cyprus', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(11, 1, 15, NULL, '2010-05-11', '2010-05-11', 'Toronto, Canada', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(12, 1, 3, NULL, '2009-11-15', '2009-11-17', 'Porto Alegre, RS, Brazil', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(13, 1, 22, NULL, '2010-06-28', '2010-07-02', 'Toronto, Canada', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(14, 1, 11, NULL, '2010-03-19', '2010-03-21', 'Porto, Portugal', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(15, 1, 9, NULL, '2009-12-01', '2009-12-01', '', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(16, 1, 16, NULL, '2009-11-23', '2009-11-23', '', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(17, 1, 14, NULL, '2010-05-03', '2010-05-04', 'Cape Town, South Africa', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(18, 1, 12, NULL, '2010-06-28', '2010-06-30', 'San Diego, CA, USA ', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(19, 1, 8, NULL, '2010-10-27', '2010-10-30', 'Washington', '0.00');
+INSERT INTO `events` (`id`, `type_id`, `publication_id`, `co_located_with_id`, `start_date`, `end_date`, `location`, `acceptance_rate`) VALUES(21, 1, 23, NULL, '2010-06-28', '2010-06-30', 'London, UK', NULL);
 
 
 
