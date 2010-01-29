@@ -32,10 +32,17 @@ class Publication
 		return $this->id;
 	}
 
+	public function set_type_id($type_id)
+	{
+		check_number($type_id, 'Invalid publication type');
+		$this->type_id = $type_id;
+	}
+	
 	public function get_type_id()
 	{
 		return $this->type_id;
 	}
+	
 
 	public function set_replaced_by_id($replaced_by_id)
 	{
@@ -72,6 +79,7 @@ class Publication
 		return $this->acronym;
 	}
 
+	
 	public function set_description($description)
 	{
 		check_string($description, 'Invalid description for the publication');

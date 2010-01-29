@@ -74,10 +74,13 @@ abstract class Database_DAO extends Database implements DAO
 		$properties = $class->getProperties();
 		$args = array();
 		foreach ($result as $key => $value) {
-			if ($class->hasProperty($key) && $class->hasMethod('get_' . $key) && ! $class->hasMethod('set_' . $key)) {
-				$args[] = $value; 	
+			if ($class->hasProperty($key) && $class->hasMethod('get_' . $key)) {
+			 	if (strpos($key, '_id') !== FALSE || ! $class->hasMethod('set_' . $key)) {
+					$args[] = $value;
+				} 	
 			}
 		}
+		
 		$object = $class->newInstanceArgs($args);
 		foreach ($result as $key => $value) {
 			$method_name = 'set_' . $key;
