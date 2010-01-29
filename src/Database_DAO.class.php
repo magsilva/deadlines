@@ -71,7 +71,14 @@ abstract class Database_DAO extends Database implements DAO
 		}
 		
 		$class = new ReflectionClass($type);
-		$object = $class->newInstance($id);
+		$properties = $class->getProperties();
+		$args = array();
+		foreach ($result as $key => $value) {
+			if ($class->hasProperty($key) && $class->hasMethod('get_' . $key) && ! $class->hasMethod('set_' . $key)) {
+				$args[] = $value; 	
+			}
+		}
+		$object = $class->newInstanceArgs($args);
 		foreach ($result as $key => $value) {
 			$method_name = 'set_' . $key;
 			if ($class->hasMethod($method_name)) {
@@ -107,15 +114,15 @@ abstract class Database_DAO extends Database implements DAO
 		$stmt .= ' WHERE ';
 		foreach ($properties as $property) {
 			if ($property->isPrivate() && $class->hasMethod('get_' . $property->getName()) && ! $class->hasMethod('set_' . $property->getName())) {
-				$stmt .= $property->getName() . '=:' . $property->getName() . ', '; 	
+				$stmt .= $property->getName() . '=:' . $property->getName() . ' AND '; 	
 			}
 		}
-		if (strpos($stmt, ', ', strlen($stmt) - 2)) {
-			$stmt = substr($stmt, 0, strlen($stmt) - 2);
+		if (strpos($stmt, ' AND ', strlen($stmt) - 5)) {
+			$stmt = substr($stmt, 0, strlen($stmt) - 5);
 		}
 		
 		$sth = $this->prepare($stmt);
-		
+
 		foreach ($properties as $property) {
 			if ($property->isPrivate() && $class->hasMethod('get_' . $property->getName())) {
 				$method = $class->getMethod('get_' . $property->getName());

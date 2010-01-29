@@ -139,36 +139,36 @@ INSERT INTO `publication_types` (`id`, `name`, `description`) VALUES(2, 'Periodi
 
 CREATE TABLE IF NOT EXISTS publications (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  replaced_by_id INTEGER,
-  publication_type_id INTEGER NOT NULL,
+  type_id INTEGER NOT NULL,
   name varchar(255) NOT NULL UNIQUE,
   acronym varchar(30),
   description varchar(255),
   periodicity varchar(255),
-  FOREIGN KEY (publication_type_id) REFERENCES publication_types(id),
+  replaced_by_id INTEGER,
+  FOREIGN KEY (type_id) REFERENCES publication_types(id),
   FOREIGN KEY (replaced_by_id) REFERENCES publications(id)
 );
 
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(3, NULL, 1, 'Ciclo de Palestras sobre Novas Tecnologias na Educação', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(4, NULL, 1, 'European Conference on Interactive TV and Video', 'EuroTV', NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(7, NULL, 1, 'IEEE International Conference on Multimedia & Expo', 'ICME', NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(8, NULL, 1, 'Frontiers in Education Conference', 'FIE', NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(9, NULL, 2, 'IEEE Transactions on Learning Technologies', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(10, NULL, 1, 'IET International Conference on Frontier Computing', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(11, NULL, 1, 'International Conference Mobile Learning', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(12, NULL, 1, 'International Conference on Multimedia and Ubiquitous Engineering', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(13, NULL, 1, 'International Conference on Software Engineering and Knowledge Engineering', 'SEKE', NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(14, NULL, 1, 'International Workshop on Automation of Software Test', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(15, NULL, 1, 'International Workshop on Modular Ontologies', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(16, NULL, 2, 'Learning Technology Newsletter', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(17, NULL, 1, 'Workshop de Arquiteturas Pedagógicas para Suporte à Educação a Distância mediada pela Internet', 'WAPSEDI', NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(18, NULL, 1, 'Workshop de Modelos Pedagógicos em Educação a Distância', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(19, NULL, 1, 'Workshop on Bytecode Semantics, Verification, Analysis and Transformation', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(20, NULL, 1, 'Workshop on Teaching Software Testing', 'WTST', NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(21, NULL, 1, 'Workshop sobre Avaliação e Acompanhamento da Aprendizagem em Ambientes Virtuais', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(22, NULL, 1, 'World Conference on Educational Multimedia, Hypermedia & Telecommunications', NULL, NULL, '');
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(23, NULL, 1, 'International Conference on Information Society', 'i-Society', NULL, NULL);
-INSERT INTO `publications` (`id`, `replaced_by_id`, `publication_type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(24, NULL, 1, 'International Conference on Interactive Computer Aided Blended Learning', 'ICBL', NULL, NULL);
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(3, NULL, 1, 'Ciclo de Palestras sobre Novas Tecnologias na Educação', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(4, NULL, 1, 'European Conference on Interactive TV and Video', 'EuroTV', NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(7, NULL, 1, 'IEEE International Conference on Multimedia & Expo', 'ICME', NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(8, NULL, 1, 'Frontiers in Education Conference', 'FIE', NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(9, NULL, 2, 'IEEE Transactions on Learning Technologies', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(10, NULL, 1, 'IET International Conference on Frontier Computing', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(11, NULL, 1, 'International Conference Mobile Learning', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(12, NULL, 1, 'International Conference on Multimedia and Ubiquitous Engineering', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(13, NULL, 1, 'International Conference on Software Engineering and Knowledge Engineering', 'SEKE', NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(14, NULL, 1, 'International Workshop on Automation of Software Test', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(15, NULL, 1, 'International Workshop on Modular Ontologies', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(16, NULL, 2, 'Learning Technology Newsletter', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(17, NULL, 1, 'Workshop de Arquiteturas Pedagógicas para Suporte à Educação a Distância mediada pela Internet', 'WAPSEDI', NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(18, NULL, 1, 'Workshop de Modelos Pedagógicos em Educação a Distância', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(19, NULL, 1, 'Workshop on Bytecode Semantics, Verification, Analysis and Transformation', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(20, NULL, 1, 'Workshop on Teaching Software Testing', 'WTST', NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(21, NULL, 1, 'Workshop sobre Avaliação e Acompanhamento da Aprendizagem em Ambientes Virtuais', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(22, NULL, 1, 'World Conference on Educational Multimedia, Hypermedia & Telecommunications', NULL, NULL, '');
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(23, NULL, 1, 'International Conference on Information Society', 'i-Society', NULL, NULL);
+INSERT INTO `publications` (`id`, `replaced_by_id`, `type_id`, `name`, `acronym`, `description`, `periodicity`) VALUES(24, NULL, 1, 'International Conference on Interactive Computer Aided Blended Learning', 'ICBL', NULL, NULL);
 
 
 
