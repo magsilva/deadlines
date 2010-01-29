@@ -15,9 +15,9 @@ class Periodical_type_Test extends DAO_Test
 
 	public function testRead()
 	{
-		$work_type = self::$dao->read(1);
-		$this->assertEquals($work_type->get_name(), 'Journal');
-		$this->assertEquals($work_type->get_description(), '');
+		$periodical_type = self::$dao->read(1);
+		$this->assertEquals($periodical_type->get_name(), 'Journal');
+		$this->assertEquals($periodical_type->get_description(), '');
 	}
 	
 	public function testCreate()
