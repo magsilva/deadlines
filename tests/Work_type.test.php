@@ -1,35 +1,15 @@
 <?php
 
 require_once('Work_type.dao.php');
-require_once('PHPUnit/Framework.php');
+require_once('DAO.class.php');
 
-class Work_type_Test extends PHPUnit_Framework_TestCase
+class Work_type_Test extends DAO_Test
 {
 	private static $dao;
 
-	private static $database;
-
-	public static function setUpBeforeClass()
+	public function setUp()
 	{
-		define('TEST_USING_SQLITE', true);
-
-		self::$database = tempnam(sys_get_temp_dir(), 'test');
-		$url = 'sqlite:' . self::$database;
-		echo 'Database will be stored at ' . self::$database . "\n";
-
-		self::$dao = new Work_type_DAO($url, 'root', '');
-		self::$dao->beginTransaction();
-		$stmts_filename = 'resources/deadline-test.sql';
-		echo 'Database will be populated using the statements found at ' . $stmts_filename . "\n";
-
-		$stmts = file_get_contents($stmts_filename, FILE_USE_INCLUDE_PATH);
-		self::$dao->exec($stmts);
-		self::$dao->commit();
-	}
-
-	public static function tearDownAfterClass()
-	{
-		 unlink(self::$database);
+		self::$dao = new Work_type_DAO(self::$url, 'root', '');
 	}
 
 	public function testRead()
