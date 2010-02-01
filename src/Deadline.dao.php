@@ -1,70 +1,34 @@
 <?
 
-require_once('Work_type.class.php');
+require_once('Database_DAO.class.php');
+require_once('Deadline.class.php');
 
-abstract class Deadline_DAO extends Database_DAO
+
+class Deadline_DAO extends Database_DAO
 {
-        public function __construct($db_driver, $db_host, $db_name, $db_user, $db_password)
+	public function __construct($url, $db_user, $db_password)
 	{
-		parent::__construct($db_driver, $db_host, $db_name, $db_user, $db_password);
+		parent::__construct($url, $db_user, $db_password);
 	}
 
-	private function manufacture_deadline($id)
+	public function create($data)
 	{
+		return parent::create($data);
+	}
 	
-		$sth = $this->dbh->prepare('SELECT * FROM deadlines WHERE id = :id');
-		$sth->bindParam(':id', $id);
-		$sth->execute();
-		$result1 = $sth->fetch(PDO::FETCH_ASSOC);
-
-
-		if ($result['conference_id'] != NULL) {
-			$deadline_type = 'event';
-		} else if ($result['journal_id'] != NULL) {
-			$deadline_type = 'periodical';
-		} else {
-			trigger_error('Deadline has not been associated to any periodical or event');
-		}
-
-
-		switch ($deadline_type) {
-			case 'event':
-				$sth = $this->dbh->prepare('SELECT * FROM deadlines INNER JOIN events ON deadlines.conference_id = events.id WHERE deadlines.id = :id');
-				$deadline = new DeadlineEvent($id);
-				break;
-			case 'periodical':
-				$sth = $this->dbh->prepare('SELECT * FROM deadlines INNER JOIN periodicals ON deadlines.journal_id = periodicals.id WHERE deadlines.id = :id');
-				$deadline = new DeadlinePeriodical($id);
-				break;
-			default:
-				assert(false);
-		}	
-
-		$sth->bindParam(':id', $id);
-		$sth->execute();
-		$result2 = $sth->fetch(PDO::FETCH_ASSOC);
-
-//		$deadline->set
+	public function read($id)
+	{
+		return parent::read($id);
 	}
 
-	private function manufacture_work_type($id)
+	public function update($object)
 	{
-		if (isset(self::$singletons['Work_type'][$id])) {
-			return self::$singletons['Work_type'][$id];
-		}
+		return parent::update($object);
+	}
 
-		$sth = $this->dbh->prepare('SELECT * FROM work_types WHERE id=:id');
-		$sth->bindParam(':id', $id);
-		$sth->execute();
-		$result = $sth->fetch(PDO::FETCH_ASSOC);
-
-		$work_type = new Work_type($id);
-		$work_type->set_name($result['name']);
-		$work_type->set_description($result['description']);
-
-		$this->singletons['Work_type'][$id] = $work_type;
-
-		return $work_type;
+	public function delete($object)
+	{
+		return parent::delete($object);
 	}
 }
 
