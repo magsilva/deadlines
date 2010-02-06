@@ -3,7 +3,7 @@
 require_once('controller/BasicFactory.class.php');
 require_once('PHPUnit/Framework.php');
 
-class BasicFactory_Test extends PHPUnit_Framework_TestCase
+class PDO_DAO_Test extends PHPUnit_Framework_TestCase
 {
 	private $factory;
 	
