@@ -1,9 +1,9 @@
 <?php
 
-require_once('Database.class.php');
-require_once('DAO.interface.php');
+require_once('controller/PDO_Database.class.php');
+require_once('controller/DAO.interface.php');
 
-abstract class Database_DAO extends Database implements DAO
+abstract class PDO_DAO extends PDO_Database implements DAO
 {
 	public function __construct($db_url, $db_user, $db_password)
 	{

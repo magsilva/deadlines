@@ -33,7 +33,7 @@ class Controller
 		$this->smarty->assign($name, $value);
 	}
 
-	public function forward($template)
+	public function forward($template, $parameters)
 	{
 		static $cache_info = array();
 
@@ -42,12 +42,24 @@ class Controller
 			trigger_error('There is no template file for ' . $template);			
 		}	
 
+		foreach ($parameters as $k => $v) {
+			$this->set($k, $v);
+		}
+		
 		$output = '';
 		$output .= $this->smarty->fetch('header.tpl');
 		$output .= $this->smarty->fetch($template_file);
 		$output .= $this->smarty->fetch('footer.tpl');
 
 		echo $output;
+	}
+	
+	public function process($object, $operation, $args)
+	{
+		require_once($object . '.class.php');
+		$action = new $object();
+		$parameters = $action->$operation($args);
+		$this->forward($object . '.' . $operation, $parameters);
 	}
 }
 

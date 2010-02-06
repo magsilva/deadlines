@@ -1,12 +1,12 @@
 <?php
 
-require_once('DAO.interface.php');
+require_once('controller/DAO.interface.php');
 
-class Database extends PDO
+class PDO_Database extends PDO
 {
 	public function __construct($db_url, $db_user, $db_password)
 	{
-		if (defined('TEST_USING_SQLITE')) {
+		if (strpos($db_url, 'sqlite') == 0) {
 			$options = array(
 				PDO::ATTR_PERSISTENT => true,
 				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -22,11 +22,6 @@ class Database extends PDO
 		}
 
 		parent::__construct($db_url, $db_user, $db_password, $options);
-	}
-
-	public static function build_url($db_driver, $db_host, $db_name)
-	{
-		return $db_driver . ':host=' . $db_host . ';dbname=' . $db_name;
 	}
 }
 
