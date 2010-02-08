@@ -1,30 +1,51 @@
-<?
+<?php
+/*
+Copyright (c) 2010 Marco Aurélio Graciotto Silva <magsilva@ironiacorp.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
 
 class Deadline
 {
 	private $id;
 	
-	private $event_id;
+	private $eventId;
 	
-	private $periodical_id;
+	private $periodicalId;
 
-	private $work_type_id;
+	private $workTypeId;
 	
-	private $abstract_submission_deadline;
+	private $abstractSubmissionDeadline;
 	
-	private $abstract_notification_acceptance;
+	private $abstractNotificationAcceptance;
 
-	private $submission_deadline;
+	private $submissionDeadline;
 
-	private $extended_submission_deadline;
+	private $extendedSubmissionDeadline;
 
-	private $notification_acceptance;
+	private $notificationAcceptance;
 
-	private $camera_ready_submission_deadline;
+	private $cameraReadySubmissionDeadline;
 
-	private $information_url;
+	private $informationUrl;
 	
-	private $submission_url;
+	private $submissionUrl;
 	
 	private $instructions;
 
@@ -34,162 +55,162 @@ class Deadline
 		$this->id = $id;
 	}
 
-	public function get_id()
+	public function getId()
 	{
 		return $this->id;
 	}
 
 	
-	public function set_event_id($id)
+	public function setEventId($id)
 	{
 		check_number($id, 'Invalid event');
-		$this->event_id = $id;
+		$this->eventId = $id;
 	}
 	
-	public function get_event_id()
+	public function getEventId()
 	{
-		return $this->event_id;
+		return $this->eventId;
 	}
 
 	
-	public function set_periodical_id($id)
+	public function setPeriodicalId($id)
 	{
 		check_number($id, 'Invalid periodical');
-		$this->periodical_id = $id;
+		$this->periodicalId = $id;
 	}
 	
-	public function get_periodical_id()
+	public function getPeriodicalId()
 	{
-		return $this->periodical_id;
+		return $this->periodicalId;
 	}
 
 	
-	public function set_work_type_id($id)
+	public function setWorkTypeId($id)
 	{
 		check_number($id, 'Invalid work type');
-		$this->work_type_id = $id;
+		$this->workTypeId = $id;
 	}
 	
-	public function get_work_type_id()
+	public function getWorkTypeId()
 	{
-		return $this->work_type_id;
+		return $this->workTypeId;
 	}
 	
 	
-	public function set_abstract_submission_deadline($date)
+	public function setAbstractSubmissionDeadline($date)
 	{
 		check_date($date, 'Invalid date for the abstract submission deadline.');
-		$this->abstract_submission_deadline = $date;
+		$this->abstractSubmissionDeadline = $date;
 	}
 
-	public function get_abstract_submission_deadline()
+	public function getAbstractSubmissionDeadline()
 	{
-		return $this->abstract_submission_deadline;
+		return $this->abstractSubmissionDeadline;
 	}
 	
 	
-	public function set_abstract_notification_acceptance($date)
+	public function setAbstractNotificationAcceptance($date)
 	{
 		check_date($date, 'Invalid date for the abstract notification deadline.');
-		check_date_difference($this->abstract_submission_deadline, $date, 0, 'The abstract notification date is set to _before_ the abstract submission date! This is probably incorrect.');
-		$this->abstract_notification_acceptance = $date;
+		check_date_difference($this->abstractSubmissionDeadline, $date, 0, 'The abstract notification date is set to _before_ the abstract submission date! This is probably incorrect.');
+		$this->abstractNotificationAcceptance = $date;
 	}
 
-	public function get_abstract_notification_acceptance()
+	public function getAbstractNotificationAcceptance()
 	{
-		return $this->abstract_notification_acceptance;
+		return $this->abstractNotificationAcceptance;
 	}
 	
 	
-	public function set_submission_deadline($date)
+	public function setSubmissionDeadline($date)
 	{
 		check_date($date, 'Invalid date for the submission deadline.');
-		if ($this->abstract_submission_deadline != NULL) {
-			check_date_difference($this->abstract_notification_acceptance, $date, 0, 'The submission date is set to _before_ the abstract notification date! This is probably incorrect.');
+		if ($this->abstractSubmissionDeadline != NULL) {
+			check_date_difference($this->abstractNotificationAcceptance, $date, 0, 'The submission date is set to _before_ the abstract notification date! This is probably incorrect.');
 		}
-		$this->submission_deadline = $date;
+		$this->submissionDeadline = $date;
 	}
 
-	public function get_submission_deadline()
+	public function getSubmissionDeadline()
 	{
-		return $this->submission_deadline;
+		return $this->submissionDeadline;
 	}
 
 
-	public function set_extended_submission_deadline($date)
+	public function setExtendedSubmissionDeadline($date)
 	{
 		check_date($date, 'Invalid date for the extended submission deadline.');
-		check_date_difference($this->submission_deadline, $date, 0, 'The extended submission date is _before_ the submission date! This is probably incorrect.');
-		$this->extended_submission_deadline = $date;
+		check_date_difference($this->submissionDeadline, $date, 0, 'The extended submission date is _before_ the submission date! This is probably incorrect.');
+		$this->extendedSubmissionDeadline = $date;
 	}
 
-	public function get_extended_submission_deadline()
+	public function getExtendedSubmissionDeadline()
 	{
-		return $this->extended_submission_deadline;
+		return $this->extendedSubmissionDeadline;
 	}
 
 
-	public function set_notification_acceptance($date)
+	public function setNotificationAcceptance($date)
 	{
 		check_date($date, 'Invalid date for the notification of acceptance.');
-		check_date_difference($this->submission_deadline, $date, 0, 'The notification of acceptance date is _before_ the submission date! This is probably incorrect.');
-		check_date_difference($this->extended_submission_deadline, $date, 0, 'The notification of acceptance date is _before_ the extended submission date! This is probably incorrect.');
-		$this->notification_acceptance = $date;
+		check_date_difference($this->submissionDeadline, $date, 0, 'The notification of acceptance date is _before_ the submission date! This is probably incorrect.');
+		check_date_difference($this->extendedSubmissionDeadline, $date, 0, 'The notification of acceptance date is _before_ the extended submission date! This is probably incorrect.');
+		$this->notificationAcceptance = $date;
 	}
 
-	public function get_notification_acceptance()
+	public function getNotificationAcceptance()
 	{
-		return $this->notification_acceptance;
+		return $this->notificationAcceptance;
 	}
 
 
-	public function set_camera_ready_submission_deadline($date)
+	public function setCameraReadySubmissionDeadline($date)
 	{
 		check_date($date, 'Invalid date for the camera ready deadline.');
-		check_date_difference($this->submission_deadline, $date, 0, 'The camera ready date is _before_ the submission date! This is probably incorrect.');
-		check_date_difference($this->extended_submission_deadline, $date, 0, 'The camera ready date is _before_ the extended submission date! This is probably incorrect.');
-		check_date_difference($this->notification_acceptance, $date, 0, 'The camera ready date is _before_ the notification of acceptance date! This is probably incorrect.');
-		$this->camera_ready_submission_deadline = $date;
+		check_date_difference($this->submissionDeadline, $date, 0, 'The camera ready date is _before_ the submission date! This is probably incorrect.');
+		check_date_difference($this->extendedSubmissionDeadline, $date, 0, 'The camera ready date is _before_ the extended submission date! This is probably incorrect.');
+		check_date_difference($this->notificationAcceptance, $date, 0, 'The camera ready date is _before_ the notification of acceptance date! This is probably incorrect.');
+		$this->cameraReadySubmissionDeadline = $date;
 	}
 
-	public function get_camera_ready_submission_deadline()
+	public function getCameraReadySubmissionDeadline()
 	{
-		return $this->camera_ready_submission_deadline;
+		return $this->cameraReadySubmissionDeadline;
 	}
 
 
-	public function set_information_url($url)
+	public function setInformationUrl($url)
 	{
 		check_url($url, 'Invalid URL for further information about the deadline');
-		$this->information_url = $url;
+		$this->informationUrl = $url;
 	}
 	
-	public function get_information_url()
+	public function getInformationUrl()
 	{
-		return $this->information_url;
+		return $this->informationUrl;
 	}
 
 	
 
-	public function set_submission_url($url)
+	public function setSubmissionUrl($url)
 	{
 		check_url($url, 'Invalid URL for submission of work for the deadline');
-		$this->submission_url = $url;
+		$this->submissionUrl = $url;
 	}
 
-	public function get_submission_url()
+	public function getSubmissionUrl()
 	{
-		return $this->submission_url;
+		return $this->submissionUrl;
 	}
 	
 	
-	public function set_instructions($instructions)
+	public function setInstructions($instructions)
 	{
 		check_string($instructions, 'Invalid text for instructions regarding the deadline');
 		$this->instructions = $instructions;
 	}
 	
-	public function get_instructions()
+	public function getInstructions()
 	{
 		return $this->instructions;
 	}

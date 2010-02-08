@@ -1,4 +1,25 @@
-<?
+<?php
+/*
+Copyright (c) 2010 Marco Aurélio Graciotto Silva <magsilva@ironiacorp.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
 
 require_once('function.check.php');
 
@@ -6,116 +27,116 @@ class Event
 {
 	private $id;
 	
-	private $type_id;
+	private $typeId;
 	
-	private $publication_id;
+	private $publicationId;
 
-	private $co_located_with_id;
+	private $coLocatedWithId;
 	
-	private $start_date;
+	private $startDate;
 	
-	private $end_date;
+	private $endDate;
 	
 	private $location;
 	
-	private $acceptance_rate;
+	private $acceptanceRate;
 	
-	public function __construct($id, $publication_id, $type_id)
+	public function __construct($id, $publicationId, $typeId)
 	{
 		check_number($id, 'Invalid identifier for event');
-		check_number($publication_id, 'Invalid publication');
-		check_number($type_id, 'Invalid event type');
+		check_number($publicationId, 'Invalid publication');
+		check_number($typeId, 'Invalid event type');
 		$this->id = $id;
-		$this->publication_id = $publication_id;
-		$this->type_id = $type_id;
+		$this->publicationId = $publicationId;
+		$this->typeId = $typeId;
 	}
 	
-	public function get_id()
+	public function getId()
 	{
 		return $this->id;
 	}
 
-	public function set_publication_id($publication_id)
+	public function setPublicationId($publicationId)
 	{
-		check_number($publication_id, 'Invalid publication');
-		$this->publication_id = $publication_id;
+		check_number($publicationId, 'Invalid publication');
+		$this->publicationId = $publicationId;
 	}
 	
-	public function get_publication_id()
+	public function getPublicationId()
 	{
-		return $this->publication_id;
+		return $this->publicationId;
 	}
 	
 	
-	public function set_type_id($type_id)
+	public function setTypeId($typeId)
 	{
-		check_number($type_id, 'Invalid event type');
-		$this->type_id = $type_id;
+		check_number($typeId, 'Invalid event type');
+		$this->typeId = $typeId;
 	}
 	
-	public function get_type_id()
+	public function getTypeId()
 	{
-		return $this->type_id;
+		return $this->typeId;
 	}
 
 
-	public function set_co_located_with_id($co_located_with_id)
+	public function setCoLocatedWithId($coLocatedWithId)
 	{
-		check_number($co_located_with_id, 'Invalid event identifier');
-		$this->co_located_with_id = $co_located_with_id;
+		check_number($coLocatedWithId, 'Invalid event identifier');
+		$this->coLocatedWithId = $coLocatedWithId;
 	}
 	
-	public function get_co_located_with_id()
+	public function getCoLocatedWithId()
 	{
-		return $this->co_located_with_id;
+		return $this->coLocatedWithId;
 	}
 	
 	
-	public function set_start_date($start_date)
+	public function setStartDate($startDate)
 	{
-		check_date($start_date, 'Invalid start date');
-		$this->start_date = $start_date;
+		check_date($startDate, 'Invalid start date');
+		$this->startDate = $startDate;
 	}
 	
-	public function get_start_date()
+	public function getStartDate()
 	{
 		return $this->start_date;
 	}
 	
 
-	public function set_end_date($end_date)
+	public function setEndDate($endDate)
 	{
-		check_date($end_date, 'Invalid end date');
-		$this->end_date = $end_date;
+		check_date($endDate, 'Invalid end date');
+		$this->endDate = $endDate;
 	}
 	
-	public function get_end_date()
+	public function get_endDate()
 	{
-		return $this->end_date;
+		return $this->endDate;
 	}
 	
 	
-	public function set_location($location)
+	public function setLocation($location)
 	{
 		check_string($location, 'Invalid location');
 		$this->location = $location;
 	}
 	
-	public function get_location()
+	public function getLocation()
 	{
 		return $this->location;
 	}
 	
 	
-	public function set_acceptance_rate($acceptance_rate)
+	public function setAcceptanceRate($acceptanceRate)
 	{
-		check_decimal($acceptance_rate, 'Invalid acceptance_rate');
-		$this->acceptance_rate = $acceptance_rate;
+		check_decimal($acceptanceRate, 'Invalid acceptance_rate');
+		$this->acceptanceRate = $acceptanceRate;
 	}
 	
-	public function get_acceptance_rate()
+	public function getAcceptanceRate()
 	{
-		return $this->acceptance_rate;
+		return $this->acceptanceRate;
 	}	
 }
 

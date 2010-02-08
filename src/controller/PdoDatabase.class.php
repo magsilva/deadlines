@@ -21,45 +21,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-require_once('function.check.php');
+require_once('controller/Dao.interface.php');
 
-
-class Sponsorship
+class PdoDatabase extends PDO
 {
-	private $publicationId;
-
-	private $sponsorsId;
-
-	public function __construct($publicationId)
+	public function __construct($db_url, $db_user, $db_password)
 	{
-		check_number($id, 'Invalid identifier for publication');
-		$this->publicationId = $publicationId;
-		$this->sponsors = array();
-	}
-
-	public function getPublicationId()
-	{
-		return $this->publicationId;
-	}
-	
-	public function set_sponsors($sponsorsId)
-	{
-		check_array_number($sponsorsId, 'Invalid sponsors');
-		$this->sponsorsId = $sponsorsId;
-	}
-	
-	public function add_sponsor($spondorId)
-	{
-		check_number($sponsorId, 'Invalid sponsor id');
-		if (! in_array($sponsorId, $this->sponsorsId)) {
-			$this->sponsorsId[] = $sponsorId;
+		if (strpos($db_url, 'sqlite') == 0) {
+			$options = array(
+				PDO::ATTR_PERSISTENT => true,
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+			);
+		} else {
+			$options = array(
+				PDO::ATTR_PERSISTENT => true,
+				PDO::ATTR_AUTOCOMMIT => false,
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+			);
 		}
-	}
 
-	public function getSponsorsId()
-	{
-		return $this->sponsorsId;
+		parent::__construct($db_url, $db_user, $db_password, $options);
 	}
 }
 
 ?>
+ 

@@ -21,45 +21,51 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-require_once('function.check.php');
 
-
-class Sponsorship
+/**
+ * Data Access Object (DAO)
+ *
+ * DAO objects are used to access the information of an object, information
+ * which is or will be stored in a database, file, or anyother data persistence
+ * format.
+ */
+interface Dao
 {
-	private $publicationId;
+	/**
+	 * Create an object.
+	 *
+	 * @param $data The mandatory data to create the object.
+	 * @return The created object with the mandatory data and any automatically
+	 * generated data (such as an id).
+	 */
+	public function create($data);
 
-	private $sponsorsId;
+	/**
+	 * Read an existent object.
+	 *
+	 * @param $id The object id (usually an integer).
+	 * @return The object read from the storage medium.
+	 */
+	public function read($id);
 
-	public function __construct($publicationId)
-	{
-		check_number($id, 'Invalid identifier for publication');
-		$this->publicationId = $publicationId;
-		$this->sponsors = array();
-	}
+	/**
+	 * Update the objet in the persistence mechanism.
+	 *
+	 * @param $object The object to be updated (stored).
+	 */
+	public function update($object);
 
-	public function getPublicationId()
-	{
-		return $this->publicationId;
-	}
+	/**
+	 * Delete the object from the persistence mechanism.
+	 *
+	 * @param $object the object to be deleted.
+	 */
+	public function delete($object);
 	
-	public function set_sponsors($sponsorsId)
-	{
-		check_array_number($sponsorsId, 'Invalid sponsors');
-		$this->sponsorsId = $sponsorsId;
-	}
-	
-	public function add_sponsor($spondorId)
-	{
-		check_number($sponsorId, 'Invalid sponsor id');
-		if (! in_array($sponsorId, $this->sponsorsId)) {
-			$this->sponsorsId[] = $sponsorId;
-		}
-	}
-
-	public function getSponsorsId()
-	{
-		return $this->sponsorsId;
-	}
+	/**
+	 * Find all the objects.
+	 */
+	public function findAll();
 }
 
 ?>

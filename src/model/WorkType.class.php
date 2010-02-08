@@ -24,41 +24,46 @@ THE SOFTWARE.
 require_once('function.check.php');
 
 
-class Sponsorship
+class WorkType
 {
-	private $publicationId;
+	private $id;
 
-	private $sponsorsId;
+	private $name;
 
-	public function __construct($publicationId)
+	private $description;
+
+	public function __construct($id)
 	{
-		check_number($id, 'Invalid identifier for publication');
-		$this->publicationId = $publicationId;
-		$this->sponsors = array();
+		check_number($id, 'Invalid identifier for Work_type');
+		$this->id = $id;
 	}
 
-	public function getPublicationId()
+	public function getId()
 	{
-		return $this->publicationId;
-	}
-	
-	public function set_sponsors($sponsorsId)
-	{
-		check_array_number($sponsorsId, 'Invalid sponsors');
-		$this->sponsorsId = $sponsorsId;
+		return $this->id;
 	}
 	
-	public function add_sponsor($spondorId)
+	public function setName($name)
 	{
-		check_number($sponsorId, 'Invalid sponsor id');
-		if (! in_array($sponsorId, $this->sponsorsId)) {
-			$this->sponsorsId[] = $sponsorId;
-		}
+		check_string($name, 'Invalid name for the work type');
+		$this->name = $name;
 	}
 
-	public function getSponsorsId()
+	public function getName()
 	{
-		return $this->sponsorsId;
+		return $this->name;
+	}
+
+
+	public function setDescription($description)
+	{
+		check_string($description, 'Invalid description for the work type');
+		$this->description = $description;
+	}
+
+	public function getDescription()
+	{
+		return $this->description;
 	}
 }
 

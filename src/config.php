@@ -8,9 +8,10 @@ $db_password = 'WqSDYQf4mWZYYfU6';
 $db_host = 'localhost';
 $db_name = 'deadline';
 
-$template_dir = $deadlines_home . '/templates';
-$config_dir = $deadlines_home . '/config';
-$cache_dir = $deadlines_home . '/cache';
+$template_dir = $deadlines_home . '/view/templates';
+$config_dir = $deadlines_home . '/view/templates/config';
+// $cache_dir = $deadlines_home . '/cache';
+$cache_dir = '/tmp/deadlines/cache';
 
 $default_object = 'deadlines';
 $default_operation = 'view';

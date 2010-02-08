@@ -1,4 +1,25 @@
 <?
+/*
+Copyright (c) 2010 Marco Aurélio Graciotto Silva <magsilva@ironiacorp.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
 
 require_once('function.check.php');
 
@@ -6,46 +27,45 @@ class Periodical
 {
 	private $id;
 	
-	private $publication_id;
+	private $publicationId;
 
-	private $type_id;
+	private $typeId;
 	
-	public function __construct($id, $publication_id, $type_id)
+	public function __construct($id, $publicationId, $typeId)
 	{
 		check_number($id, 'Invalid identifier for publication');
-		check_number($publication_id, 'Invalid publication');
-		check_number($type_id, 'Invalid periodical type');
+		check_number($publicationId, 'Invalid publication');
+		check_number($typeId, 'Invalid periodical type');
 		$this->id = $id;
-		$this->publication_id = $publication_id;
-		$this->type_id = $type_id;
+		$this->publicationId = $publicationId;
+		$this->typeId = $typeId;
 	}
 	
-	public function get_id()
+	public function getId()
 	{
 		return $this->id;
 	}
 
-	public function set_publication_id($publication_id)
+	public function setPublicationId($publicationId)
 	{
-		check_number($publication_id, 'Invalid publication');
-		$this->publication_id = $publication_id;
+		check_number($publicationId, 'Invalid publication');
+		$this->publicationId = $publicationId;
 	}
 	
-	public function get_publication_id()
+	public function getPublicationId()
 	{
 		return $this->publication_id;
 	}
 	
-	
-	public function set_type_id($type_id)
+	public function setTypeId($typeId)
 	{
-		check_number($type_id, 'Invalid periodical type');
-		$this->type_id = $type_id;
+		check_number($typeId, 'Invalid periodical type');
+		$this->typeId = $typeId;
 	}
 	
-	public function get_type_id()
+	public function getTypeId()
 	{
-		return $this->type_id;
+		return $this->typeId;
 	}
 }
 

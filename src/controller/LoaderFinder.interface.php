@@ -21,45 +21,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-require_once('function.check.php');
 
-
-class Sponsorship
+interface LoaderFinder
 {
-	private $publicationId;
-
-	private $sponsorsId;
-
-	public function __construct($publicationId)
-	{
-		check_number($id, 'Invalid identifier for publication');
-		$this->publicationId = $publicationId;
-		$this->sponsors = array();
-	}
-
-	public function getPublicationId()
-	{
-		return $this->publicationId;
-	}
-	
-	public function set_sponsors($sponsorsId)
-	{
-		check_array_number($sponsorsId, 'Invalid sponsors');
-		$this->sponsorsId = $sponsorsId;
-	}
-	
-	public function add_sponsor($spondorId)
-	{
-		check_number($sponsorId, 'Invalid sponsor id');
-		if (! in_array($sponsorId, $this->sponsorsId)) {
-			$this->sponsorsId[] = $sponsorId;
-		}
-	}
-
-	public function getSponsorsId()
-	{
-		return $this->sponsorsId;
-	}
+	public function find($type);
 }
 
 ?>
