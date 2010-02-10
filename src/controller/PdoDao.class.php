@@ -42,7 +42,19 @@ abstract class PdoDao extends PdoDatabase implements Dao
 	protected function getTableName()
 	{
 		$type = $this->getType();
-		$table = strtolower($type) . 's';
+		$table = strtolower($type{0});
+		for ($i = 1; $i < strlen($type); $i++) {
+			if ($type{$i} == strtoupper($type{$i})) {
+				$table .= '_' . strtolower($type{$i});
+			} else {
+				$table .= $type{$i};
+			}
+		}
+		if ($table{strlen($table) - 1} == 's') {
+			$table .= 'es';
+		} else {
+			$table .= 's';
+		}
 		return $table;		
 	}
 	
@@ -248,7 +260,11 @@ abstract class PdoDao extends PdoDatabase implements Dao
 				}
 			}
 		
-			$result[] = $object;
+			if ($class->hasProperty('id')) {
+				$result[$row['id']] = $object;
+			} else {
+				$result[] = $object;
+			}
 		}
 		
 		return $result;

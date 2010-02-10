@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Copyright (c) 2010 Marco Aurélio Graciotto Silva <magsilva@ironiacorp.com>
 
@@ -31,14 +31,10 @@ class Periodical
 
 	private $typeId;
 	
-	public function __construct($id, $publicationId, $typeId)
+	public function __construct($id)
 	{
 		check_number($id, 'Invalid identifier for publication');
-		check_number($publicationId, 'Invalid publication');
-		check_number($typeId, 'Invalid periodical type');
 		$this->id = $id;
-		$this->publicationId = $publicationId;
-		$this->typeId = $typeId;
 	}
 	
 	public function getId()
@@ -54,7 +50,7 @@ class Periodical
 	
 	public function getPublicationId()
 	{
-		return $this->publication_id;
+		return $this->publicationId;
 	}
 	
 	public function setTypeId($typeId)

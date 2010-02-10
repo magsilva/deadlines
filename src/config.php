@@ -6,7 +6,7 @@ $db_dbms = 'mysql';
 $db_user = 'deadlines';
 $db_password = 'WqSDYQf4mWZYYfU6';
 $db_host = 'localhost';
-$db_name = 'deadline';
+$db_name = 'deadlines';
 
 $template_dir = $deadlines_home . '/view/templates';
 $config_dir = $deadlines_home . '/view/templates/config';

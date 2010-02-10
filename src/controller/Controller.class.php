@@ -81,6 +81,13 @@ class Controller
 		$className = $object . 'Action';
 		$action = new $className();
 		$parameters = $action->$operation($args);
+		
+		$this->set('appName', 'Deadlines');
+		$this->set('appVersion', '1.0');
+		$this->set('appObject', $object);
+		$this->set('appOperation', $operation);
+		$this->set('appTheme', 'ironiacorp');
+			
 		$this->forward($object . '.' . $operation, $parameters);
 	}
 }

@@ -30,13 +30,42 @@ class DeadlinesAction implements Action
 		global $daoFactory;
 		$result = array();
 		
-		$dao = $daoFactory->manufacture('Deadline');
-		$deadlines = $dao->findAll();
+		$daoDeadline = $daoFactory->manufacture('Deadline');
+		$deadlines = $daoDeadline->findAll();
+		foreach ($deadlines as $deadline) {
+			if ($deadline->getEventId() != NULL) {	
+				$eventDao = $daoFactory->manufacture('Event');
+				$event = $eventDao->read($deadline->getEventId());
+				$publicationDao = $daoFactory->manufacture('Publication');
+				$publication = $publicationDao->read($event->getPublicationId());
+				$publication->event = $event;
+			}
+			if ($deadline->getPeriodicalId() != NULL) {
+				$periodicalDao = $daoFactory->manufacture('Periodical');
+				$periodical = $periodicalDao->read($deadline->getPeriodicalId());
+				$publicationDao = $daoFactory->manufacture('Publication');
+				$publication = $publicationDao->read($periodical->getPublicationId());
+				$publication->periodical = $periodical;
+			}
+			$deadline->publication = $publication;
+		}
 		$result['deadlines'] = $deadlines;
+				
+		$eventTypeDao = $daoFactory->manufacture('EventType');
+		$result['eventTypes'] = $eventTypeDao->findAll();
+		
+		$periodicalTypeDao = $daoFactory->manufacture('PeriodicalType');
+		$result['periodicalTypes'] = $periodicalTypeDao->findAll();
+
+		$publicationTypeDao = $daoFactory->manufacture('PublicationType');
+		$result['publicationTypes'] = $publicationTypeDao->findAll();
+				
+		$workTypeDao = $daoFactory->manufacture('WorkType');
+		$result['workTypes'] = $workTypeDao->findAll();
+		
 		
 		return $result;
 	}
-	
 }
 
 ?>

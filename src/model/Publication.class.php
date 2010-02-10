@@ -1,4 +1,25 @@
-<?
+<?php
+/*
+Copyright (c) 2010 Marco Aurélio Graciotto Silva <magsilva@ironiacorp.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
 
 require_once('function.check.php');
 
@@ -6,9 +27,9 @@ class Publication
 {
 	private $id;
 	
-	private $type_id;
+	private $typeId;
 
-	private $replaced_by_id;
+	private $replacedById;
 	
 	private $name;
 	
@@ -18,87 +39,85 @@ class Publication
 	
 	private $periodicity;
 
-	public function __construct($id, $type_id)
+	public function __construct($id)
 	{
 		check_number($id, 'Invalid identifier for publication');
-		check_number($type_id, 'Invalid publication type');
 		$this->id = $id;
-		$this->type_id = $type_id;
 	}
 
 	
-	public function get_id()
+	public function getId()
 	{
 		return $this->id;
 	}
 
-	public function set_type_id($type_id)
+	public function setTypeId($typeId)
 	{
-		check_number($type_id, 'Invalid publication type');
-		$this->type_id = $type_id;
+		check_number($typeId, 'Invalid publication type');
+		$this->typeId = $typeId;
 	}
 	
-	public function get_type_id()
+	public function getTypeId()
 	{
-		return $this->type_id;
+		return $this->typeId;
 	}
 	
 
-	public function set_replaced_by_id($replaced_by_id)
+	public function setReplacedById($replacedById)
 	{
-		check_number($replaced_by_id, 'Invalid publication type');
-		$this->replaced_by_id = $replaced_by_id;
+		check_number($replacedById, 'Invalid publication type');
+		$this->replacedById = $replacedById;
 	}
 	
-	public function get_replaced_by_id()
+	public function getReplacedById()
 	{
-		return $this->replaced_by_id;
+		return $this->replacedById;
 	}
 	
 	
-	public function set_name($name)
+	public function setName($name)
 	{
 		check_string($name, 'Invalid name for the publication');
 		$this->name = $name;
 	}
 
-	public function get_name()
+	public function getName()
 	{
 		return $this->name;
 	}
 
 	
-	public function set_acronym($acronym)
+	public function setAcronym($acronym)
 	{
 		check_string($acronym, 'Invalid acronym for the publication');
 		$this->acronym = $acronym;
 	}
 
-	public function get_acronym()
+	public function getAcronym()
 	{
 		return $this->acronym;
 	}
 
 	
-	public function set_description($description)
+	public function setDescription($description)
 	{
 		check_string($description, 'Invalid description for the publication');
 		$this->description = $description;
 	}
 
-	public function get_description()
+	public function getDescription()
 	{
 		return $this->description;
 	}
 	
 	
-	public function set_periodicity($periodicity)
+	public function setPeriodicity($periodicity)
 	{
 		check_string($periodicity, 'Invalid periodicity for the publication');
 		$this->periodicity = $periodicity;
 	}
 
-	public function get_periodicity()
+	public function getPeriodicity()
 	{
 		return $this->periodicity;
 	}

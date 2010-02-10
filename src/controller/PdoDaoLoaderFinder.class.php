@@ -64,7 +64,7 @@ class PdoDaoLoaderFinder implements LoaderFinder
 	{
 		$class_name = $type . 'PdoDao';
 		if (! class_exists($class_name, false)) {
-				$result = $this->generate_class($type);
+			$result = $this->generate_class($type);
 			if ($result == FALSE) {
 				return NULL;
 			}

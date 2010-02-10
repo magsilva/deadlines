@@ -41,14 +41,10 @@ class Event
 	
 	private $acceptanceRate;
 	
-	public function __construct($id, $publicationId, $typeId)
+	public function __construct($id)
 	{
 		check_number($id, 'Invalid identifier for event');
-		check_number($publicationId, 'Invalid publication');
-		check_number($typeId, 'Invalid event type');
 		$this->id = $id;
-		$this->publicationId = $publicationId;
-		$this->typeId = $typeId;
 	}
 	
 	public function getId()
