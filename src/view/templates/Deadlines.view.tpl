@@ -18,7 +18,7 @@
 						"bInfo": true,
 						"bAutoWidth": true,
 						"bStateSave": true,
-						"sDom": '<"top"i>rt<"bottom"flp<"clear">',
+						"sDom": '<"top"if>rt<"bottom"lp>',
 						"fnRowCallback": function(nRow, aData, iDisplayIndex) {
 							var startDate = Date.parseIso8601(aData[2]);
 							if (startDate.compare(new Date(), "day") == -1) {
