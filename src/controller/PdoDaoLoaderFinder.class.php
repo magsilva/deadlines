@@ -66,11 +66,18 @@ class PdoDaoLoaderFinder implements LoaderFinder
 		if (! class_exists($class_name, false)) {
 			$result = $this->generate_class($type);
 			if ($result == FALSE) {
-				return NULL;
+				trigger_error('Could not create the PDO DAO for ' . $type);
 			}
 		} 
 		
-		$loader = new $class_name($this->url, $this->user, $this->password);
+		$args = array();
+		$args[] = $this->url;
+		$args[] = $this->user;
+		$args[] = $this->password;
+		$reflectionObj = new ReflectionClass($class_name);
+		$loader = $reflectionObj->newInstanceArgs($args);
+		$loader = $reflectionObj->newInstanceArgs($args);
+
 		return $loader;
 	}
 
@@ -125,7 +132,7 @@ EOT;
 			trigger_error('Could not generate PDO DAO class for ' . $type, E_USER_ERROR);
 			return FALSE;
 		}
-		
+	
 		return TRUE;
 	}
 	

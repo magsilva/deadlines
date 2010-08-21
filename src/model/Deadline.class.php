@@ -152,6 +152,9 @@ class Deadline
 
 	public function setNotificationAcceptance($date)
 	{
+		if ($date == NULL) {
+			return;
+		}
 		check_date($date, 'Invalid date for the notification of acceptance.');
 		check_date_difference($this->submissionDeadline, $date, 0, 'The notification of acceptance date is _before_ the submission date! This is probably incorrect.');
 		check_date_difference($this->extendedSubmissionDeadline, $date, 0, 'The notification of acceptance date is _before_ the extended submission date! This is probably incorrect.');
@@ -166,6 +169,10 @@ class Deadline
 
 	public function setCameraReadySubmissionDeadline($date)
 	{
+		if ($date == NULL) {
+			return;
+		}
+
 		check_date($date, 'Invalid date for the camera ready deadline.');
 		check_date_difference($this->submissionDeadline, $date, 0, 'The camera ready date is _before_ the submission date! This is probably incorrect.');
 		check_date_difference($this->extendedSubmissionDeadline, $date, 0, 'The camera ready date is _before_ the extended submission date! This is probably incorrect.');

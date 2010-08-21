@@ -118,7 +118,7 @@ class DaoFactory implements Factory
 			}
 		}
 		
-		return NULL;
+		trigger_eror('The requested object type is not supported', E_USER_WARNING);
 	}
 }
 
