@@ -1,3 +1,5 @@
-#Mon Jan 25 17:32:51 BRST 2010
+#Sun Oct 24 00:11:26 BRST 2010
 eclipse.preferences.version=1
-include_path=0;/Deadlines
+include_path=0;/Deadlines\u00050;/Deadlines/src
+phpVersion=php5.3
+use_asp_tags_as_php=false
